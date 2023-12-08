@@ -78,7 +78,7 @@ export default function AdminDashboard(){
                     <MDBCardTitle>Player Name</MDBCardTitle>
                     <MDBCardText>Player Stats</MDBCardText>
                     <MDBCardText>Player Stats</MDBCardText>
-                    <MDBBtn onClick={handleStartStop}>{isRunning ? 'Stop' : 'Start'}</MDBBtn>
+                    <MDBBtn onClick={handleStartStop} style={{margin:'4px'}}>{isRunning ? 'Stop' : 'Start'}</MDBBtn><MDBBtn onClick={handleReset} style={{margin:'4px'}}>Reset</MDBBtn>
                 </MDBCardBody>
             </MDBCard>)}
             </MDBCol>
