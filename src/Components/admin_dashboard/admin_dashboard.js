@@ -407,7 +407,7 @@ export default function AdminDashboard() {
                 {/* <MDBCardText>Player Stats</MDBCardText>
                 <MDBCardText>Player Stats</MDBCardText> */}
                  <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <MDBBtn onClick={handleStartStop}>{isRunning ? 'Stop' : 'Start'}</MDBBtn>
+                <MDBBtn onClick={handleStartStop} style={{margin:'4px'}}>{isRunning ? 'Stop' : 'Start'}</MDBBtn><MDBBtn onClick={handleReset} style={{margin:'4px'}}>Reset</MDBBtn>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -420,8 +420,8 @@ export default function AdminDashboard() {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-  );
-}
+  );}
+
 
 
 
