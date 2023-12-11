@@ -4,7 +4,7 @@ import { MDBRow, MDBCol,MDBBtn,MDBContainer, MDBBtnGroup ,MDBCard,
     MDBCardBody,
     MDBCardTitle,
     MDBCardText} from 'mdb-react-ui-kit';
- 
+import { database } from '../../firebase'; 
 
 export default function AdminDashboard(){
     const [milliseconds, setMilliseconds] = useState(30000);
