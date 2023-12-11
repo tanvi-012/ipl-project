@@ -1,50 +1,3 @@
-# from flask import Flask, request, jsonify
-# import mysql.connector
-
-# app = Flask(__name__)
-
-# # MySQL configuration
-# mysql_config = {
-#     'host': 'localhost',
-#     'user': '',
-#     'password': '',
-#     'database': '',
-# }
-
-# # Function to create a MySQL connection
-# def create_connection():
-#     connection = mysql.connector.connect(**mysql_config)
-#     return connection
-
-# # Route to handle the SQL query
-# @app.route('/execute-query', methods=['GET'])
-# def execute_query():
-#     try:
-#         connection = create_connection()
-#         cursor = connection.cursor(dictionary=True)
-
-#         query = "SELECT PlayerID as ID , PlayerName as Name FROM IPL where Type = 'Batsman';"
-#         cursor.execute(query)
-#         data = cursor.fetchall()
-
-#         return jsonify(data)
-
-#     except Exception as e:
-#         return jsonify({'error': str(e)})
-
-#     finally:
-#         if connection.is_connected():
-#             cursor.close()
-#             connection.close()
-            
-
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-    
-    
-    
-    
 from flask import Flask, request, jsonify
 import mysql.connector
 from flask_cors import CORS
@@ -55,9 +8,9 @@ CORS(app)
 # MySQL configuration
 mysql_config = {
     'host': 'localhost',
-    'user': '',
-    'password': '',
-    'database': '',
+    'user': 'harsh',
+    'password': '7hH#541278',
+    'database': 'IPL data',
 }
 
 # Function to create a MySQL connection
