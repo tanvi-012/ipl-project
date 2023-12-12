@@ -5,8 +5,8 @@ import { MDBRow, MDBCol,MDBBtn,MDBContainer, MDBBtnGroup ,MDBCard,
     MDBCardTitle,
     MDBCardText} from 'mdb-react-ui-kit';
 import { database } from '../../firebase'; 
-
-export default function AdminDashboard(){
+import axios from 'axios';
+exporzt default function AdminDashboard(){
     const [milliseconds, setMilliseconds] = useState(30000);
     const [isRunning, setIsRunning] = useState(false);
     const [isCardVisible, setCardVisibility]= useState(false);
@@ -86,3 +86,58 @@ export default function AdminDashboard(){
       </MDBContainer>
     );
   }
+      </MDBRow>
+      <MDBRow className='g-0 d-flex align-items-center' style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+        <MDBCol className='d-flex align-items-center'>
+          {isCardVisible && (
+            <MDBCard style={{ width: '400px', alignItems: 'center', margin: '0 auto' }}>
+              <MDBCardHeader style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>{selectedCategory==="Batsman(w/k)"?"Wicket Keeper":selectedCategory}</MDBCardHeader>
+              <MDBCardBody>
+              <MDBCardTitle>
+                  {data && data.length > 0 && currentIndex < data.length && (
+                    // Define the order in which you want to display the keys for each category
+                    (() => {
+                      const categoryKeyOrders = {
+                        Batsman: ['Batsman_ID', 'Name','Average','Strike_Rate'],
+                        Bowler: ['Bowler_ID','Name','Average','Strike_Rate' ],
+                        'All Rounder':['All_Rounder_ID','Name','Batting_Average','Batting_Strike_Rate','Bowling_Average','Bowling_Strike_Rate'],
+                        'Batsman(w/k)' : ['Wicket_Keeper_ID','Name','Average','Strike_Rate']
+                        // Add other categories and their respective key orders as needed
+                      };
+
+                      const keyOrder = categoryKeyOrders[selectedCategory] || [];
+
+                      return keyOrder.map((key) => (
+                        <tr key={key}>
+                        <td style={{ color: 'blue', fontWeight: 'bold' }}>{key}</td>
+                        <td style={{ color: 'red', fontWeight: 'bold' }}>:</td>
+                        <td style={{ color: 'green' }}>{data[currentIndex][key]}</td>
+                        </tr>
+                      ));
+                    })()
+                  )}
+                </MDBCardTitle>
+                {/* <MDBCardText>Player Stats</MDBCardText>
+                <MDBCardText>Player Stats</MDBCardText> */}
+                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                <MDBBtn onClick={handleStartStop} style={{margin:'4px'}}>{isRunning ? 'Stop' : 'Start'}</MDBBtn><MDBBtn onClick={handleReset} style={{margin:'4px'}}>Reset</MDBBtn>
+                </div>
+              </MDBCardBody>
+            </MDBCard>
+          )}
+          {allPlayersFinished && (
+          <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', background: 'white', padding: '20px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)' }}>
+          <p>All players in the {selectedCategory==="Batsman(w/k)"?"Wicket Keeper":selectedCategory} category have been displayed!</p>
+          </div>)}
+          
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+  );}
+
+
+
+
+
+     
+     
