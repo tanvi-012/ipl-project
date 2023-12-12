@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import {
   MDBBtn,
   MDBContainer,
@@ -11,23 +12,27 @@ import {
   MDBCheckbox
 }
 from 'mdb-react-ui-kit';
-import {signInWithEmailAndPassword} from 'firebase/auth';
-import {auth} from "../../firebase";
+import {getAuth,signInWithEmailAndPassword} from 'firebase/auth';
 import logo from '../../images/ipl_logo.jpg';
 
 function AdminLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const signIn =(e)=>{
-      e.preventDefault();
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-           console.log(userCredential);
-        })
-        .catch((errror) =>{
-          console.log(errror);
-
-        });
+    const auth = getAuth()
+    const navigate = useNavigate();
+        async function handleSignIn(e){
+          e.preventDefault();
+      signInWithEmailAndPassword(auth,email,password)
+      .then((user) => {
+          // Success...
+          console.log(user)
+          navigate('/admindb')
+          //...
+      })
+      .catch((error) => {
+          // Error
+          console.log(error)
+      })
     };
   return (
     <MDBContainer className='my-5'>
@@ -41,7 +46,7 @@ function AdminLogin() {
 
           <MDBCol md='8'>
             <MDBCardBody>
-              <form onSubmit={signIn}>
+              <form>
               <h1>Login</h1>
               <div className="d-flex mb-4">
                 <a href="./team">Team</a>
@@ -51,12 +56,7 @@ function AdminLogin() {
               <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
               <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
 
-              <div className="d-flex justify-content-between mx-4 mb-4">
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                <a href="!#">Forgot password?</a>
-              </div>
-
-              <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+              <MDBBtn className="mb-4 w-100" onClick={(e) => {handleSignIn(e)}}>Sign in</MDBBtn>
               </form>
             </MDBCardBody>
 

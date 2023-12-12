@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import {
   MDBBtn,
   MDBContainer,
@@ -15,23 +16,29 @@ import {
   MDBDropdownToggle
 }
 from 'mdb-react-ui-kit';
-import {signInWithEmailAndPassword} from 'firebase/auth';
-import {auth} from "../../firebase";
+import {getAuth,signInWithEmailAndPassword} from 'firebase/auth';
 import logo from '../../images/ipl_logo.jpg';
 
 function TeamLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const signIn =(e)=>{
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-         console.log(userCredential);
-      })
-      .catch((errror) =>{
-        console.log(errror);
+  const [team,setTeam]= useState('');
 
-      });
+    const auth = getAuth()
+    const navigate = useNavigate();
+    const handleSignIn = (e) => {
+        e.preventDefault();
+    signInWithEmailAndPassword(auth,email,password)
+    .then((user) => {
+        // Success...
+        console.log(user.user.uid)
+        navigate(`/teamdb/${user.user.uid}`)
+        //...
+    })
+    .catch((error) => {
+        // Error
+        console.log(error)
+    })
   };
   return (
     <MDBContainer className='my-5'>
@@ -46,7 +53,7 @@ function TeamLogin() {
           <MDBCol md='8'>
 
             <MDBCardBody>
-              <form onSubmit={signIn}>
+              <form onSubmit={handleSignIn}>
               <h1>Login</h1>
               <div className="d-flex mb-4">
                 <a href="./team">Team</a>
@@ -56,26 +63,21 @@ function TeamLogin() {
               <MDBDropdown>
                 <MDBDropdownToggle color='secondary'>Choose your team</MDBDropdownToggle>
                 <MDBDropdownMenu dark>
-                    <MDBDropdownItem link>MI</MDBDropdownItem>
+                    <MDBDropdownItem link >MI</MDBDropdownItem>
                     <MDBDropdownItem link>CSK</MDBDropdownItem>
                     <MDBDropdownItem link>RCB</MDBDropdownItem>
-                    <MDBDropdownItem link>GT</MDBDropdownItem>
-                    <MDBDropdownItem link>RR</MDBDropdownItem>
-                    <MDBDropdownItem link>PK</MDBDropdownItem>
-                    <MDBDropdownItem link>DC</MDBDropdownItem>
-                    <MDBDropdownItem link>SRH</MDBDropdownItem>
-                    <MDBDropdownItem link>LSG</MDBDropdownItem>
-                    <MDBDropdownItem link>KKR</MDBDropdownItem>
+                    <MDBDropdownItem link hreF>GT</MDBDropdownItem>
+                    <MDBDropdownItem link hreF>RR</MDBDropdownItem>
+                    <MDBDropdownItem link hreF>PK</MDBDropdownItem>
+                    <MDBDropdownItem link hreF>DC</MDBDropdownItem>
+                    <MDBDropdownItem link hreF>SRH</MDBDropdownItem>
+                    <MDBDropdownItem link hreF>LSG</MDBDropdownItem>
+                    <MDBDropdownItem link hreF>KKR</MDBDropdownItem>
                 </MDBDropdownMenu>
                 </MDBDropdown>
                 </div>
               <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
               <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-
-              <div className="d-flex justify-content-between mx-4 mb-4">
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                <a href="!#">Forgot password?</a>
-              </div>
 
               <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
             </form>

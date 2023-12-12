@@ -4,12 +4,18 @@ import { MDBRow, MDBCol,MDBBtn,MDBContainer, MDBBtnGroup ,MDBCard,
     MDBCardBody,
     MDBCardTitle,
     MDBCardText} from 'mdb-react-ui-kit';
-import { database } from '../../firebase'; 
+import { database } from '../../fbconfig'; 
 import axios from 'axios';
-exporzt default function AdminDashboard(){
+
+
+export default function AdminDashboard(){
     const [milliseconds, setMilliseconds] = useState(30000);
     const [isRunning, setIsRunning] = useState(false);
     const [isCardVisible, setCardVisibility]= useState(false);
+    const [data, setData] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [allPlayersFinished, setAllPlayersFinished] = useState(false);
 
     const handleCardClick = () => {
         setCardVisibility(!isCardVisible);
@@ -45,7 +51,43 @@ exporzt default function AdminDashboard(){
       console.log('Timer Completed!');
       setMilliseconds(30000);
       setIsRunning(false);
-    }; 
+    };
+
+    const fetchData = async (category) => {
+      try {
+        const response = await axios.get(`http://localhost:5000/execute-query?category=${category}`);
+        setData(response.data);
+        setAllPlayersFinished(false);
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    };
+  
+    const handleButtonClick = (category) => {
+      setCardVisibility(true);
+      setSelectedCategory(category);
+  
+      if (!data || currentIndex === data.length || category !== selectedCategory) {
+        fetchData(category);
+        setCurrentIndex(0);
+      } else {
+        setCurrentIndex(currentIndex + 1);
+      }
+    };
+  
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    useEffect(() => {
+      if (data && currentIndex >= data.length &&currentIndex!=0) {
+        setAllPlayersFinished(true);
+        setCardVisibility(false);
+      } else {
+        setAllPlayersFinished(false);
+      }
+    }, [data, currentIndex]);
+  
     return (
     <MDBContainer className='my-5'>
         <MDBRow className='g-0 d-flex align-items-center'>
@@ -56,36 +98,19 @@ exporzt default function AdminDashboard(){
         </MDBRow>
         <MDBRow className='g-0 d-flex align-items-center' style={{paddingTop:'20px',paddingBottom:'20px'}}>
             <MDBBtnGroup shadow='0'>
-            <MDBBtn color='secondary' onClick={handleReset&&handleCardClick} style={{margin:'4px'}}>
+            <MDBBtn color='secondary' onClick={handleReset&&handleCardClick} disabled={isRunning} style={{margin:'4px'}}>
             Batsman
             </MDBBtn>
-            <MDBBtn color='secondary'onClick={handleReset&&handleCardClick} style={{margin:'4px'}}>
+            <MDBBtn color='secondary'onClick={handleReset&&handleCardClick} disabled={isRunning} style={{margin:'4px'}}>
             Bowler
             </MDBBtn>
-            <MDBBtn color='secondary' onClick={handleReset&&handleCardClick} style={{margin:'4px'}}>
+            <MDBBtn color='secondary' onClick={handleReset&&handleCardClick} disabled={isRunning} style={{margin:'4px'}}>
             All Rounder
             </MDBBtn>
-            <MDBBtn color='secondary' onClick={handleReset&&handleCardClick} style={{margin:'4px'}}>
+            <MDBBtn color='secondary' onClick={handleReset&&handleCardClick} disabled={isRunning} style={{margin:'4px'}}>
             Wicketkeeper
             </MDBBtn>
         </MDBBtnGroup>
-        </MDBRow>
-        <MDBRow className='g-0 d-flex align-items-center' style={{paddingTop:'20px',paddingBottom:'20px'}}>
-            <MDBCol className='d-flex align-items-center'>
-            {isCardVisible&& (<MDBCard style={{width:'400px',alignItems:'center', margin:'0 auto'}}>
-                <MDBCardHeader>Batsmen</MDBCardHeader>
-                <MDBCardBody>
-                    <MDBCardTitle>Player Name</MDBCardTitle>
-                    <MDBCardText>Player Stats</MDBCardText>
-                    <MDBCardText>Player Stats</MDBCardText>
-                    <MDBBtn onClick={handleStartStop} style={{margin:'4px'}}>{isRunning ? 'Stop' : 'Start'}</MDBBtn><MDBBtn onClick={handleReset} style={{margin:'4px'}}>Reset</MDBBtn>
-                </MDBCardBody>
-            </MDBCard>)}
-            </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    );
-  }
       </MDBRow>
       <MDBRow className='g-0 d-flex align-items-center' style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <MDBCol className='d-flex align-items-center'>
@@ -120,7 +145,7 @@ exporzt default function AdminDashboard(){
                 {/* <MDBCardText>Player Stats</MDBCardText>
                 <MDBCardText>Player Stats</MDBCardText> */}
                  <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <MDBBtn onClick={handleStartStop} style={{margin:'4px'}}>{isRunning ? 'Stop' : 'Start'}</MDBBtn><MDBBtn onClick={handleReset} style={{margin:'4px'}}>Reset</MDBBtn>
+                <MDBBtn onClick={handleStartStop} disabled={isRunning} style={{margin:'4px'}}>Start</MDBBtn><MDBBtn onClick={handleReset} style={{margin:'4px'}}>Reset</MDBBtn>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -134,10 +159,3 @@ exporzt default function AdminDashboard(){
       </MDBRow>
     </MDBContainer>
   );}
-
-
-
-
-
-     
-     

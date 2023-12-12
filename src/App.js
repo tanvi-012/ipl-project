@@ -1,22 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import TeamLogin from './Components/login/login_team';
 import AdminLogin from './Components/login/login_admin';
 import TeamDashboard from './Components/team_dashboard/team_dashboard';
 import AdminDashboard from './Components/admin_dashboard/admin_dashboard';
+import { Protected } from './Routes/Protected';
+import { AuthContext } from './Contexts/AuthContext';
+
+
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path:"/admindb",
+      element:<Protected><AdminDashboard/></Protected>
+    },
+    {
+      path:"/teamdb/:id",
+      element:<Protected><TeamDashboard/></Protected>
+    },
+    {
+      path:"/team",
+      element:<TeamLogin/>
+    },
+    {
+      path:"/",
+      element:<AdminLogin></AdminLogin>
+    }
+  ])
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" Component={AdminLogin}></Route>
-        <Route exact path="/team" Component={TeamLogin}></Route>
-        <Route exact path="/teamdb" Component={TeamDashboard}></Route>
-        <Route exact path="/admindb" Component={AdminDashboard}></Route>
-      </Routes>
-    </Router>
+    <AuthContext>
+    <RouterProvider router={router}></RouterProvider>
+    </AuthContext>
   );
 }
 

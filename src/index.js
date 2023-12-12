@@ -5,10 +5,16 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import App from './App.js';
 import reportWebVitals from './reportWebVitals';
+import fbconfig from './fbconfig.js'
+import { initializeApp} from 'firebase/app'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <App/>
+const app = initializeApp(fbconfig)
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  
 );
 
 // If you want to start measuring performance in your app, pass a function
