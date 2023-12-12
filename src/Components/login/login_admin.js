@@ -26,7 +26,8 @@ function AdminLogin() {
       .then((user) => {
           // Success...
           console.log(user)
-          navigate('/admindb')
+          if(email==='admin@gmail.com')navigate('/admindb')
+          else{console.log('unauthorized')}
           //...
       })
       .catch((error) => {
