@@ -1,7 +1,7 @@
 import React from 'react';
 import { MDBCard, MDBCardHeader, MDBCardBody } from 'mdb-react-ui-kit';
 
-const PlayerCard = ({ data, currentIndex, selectedCategory, isCardVisible, handleStartStop, handleReset, allPlayersFinished }) => {
+const PlayerCard = ({ data, currentIndex, selectedCategory, isCardVisible,allPlayersFinished }) => {
   const getCategoryName = (category) => {
     if (category === "Batsman(w/k)") {
       return "Wicket Keeper";
@@ -47,12 +47,6 @@ const PlayerCard = ({ data, currentIndex, selectedCategory, isCardVisible, handl
               </tbody>
             </table>
             <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <button onClick={handleStartStop} style={{ margin: '4px' }}>
-                Start
-              </button>
-              <button onClick={handleReset} style={{ margin: '4px' }}>
-                Reset
-              </button>
             </div>
           </MDBCardBody>
         </MDBCard>

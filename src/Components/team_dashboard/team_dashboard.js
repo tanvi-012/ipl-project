@@ -12,8 +12,8 @@ MDBContainer,
   MDBRow,
   MDBCol
 } from 'mdb-react-ui-kit';
-import { useTimer } from '../timer';
 import PlayerCard from '../playerCard';
+import TimerComponent from '../timer';
 
 const LiStyle ={
   width: '25%',
@@ -27,7 +27,6 @@ const ListTitle={
 }
 
 export default function TeamDashboard() {
-  const { seconds} = useTimer();
   return (
     <MDBContainer className='my-5'>
       <MDBRow className='g-0 d-flex align-items-center mb-4'>
@@ -37,7 +36,7 @@ export default function TeamDashboard() {
         </MDBCard>
       </MDBCol>
       <MDBCol md='4'>
-          <div className='mx-4 mb-4'>Timer: {seconds}</div>
+          <div className='mx-4 mb-4'><TimerComponent></TimerComponent></div>
           <div className='mx-4 mb-4'>Previous Bid</div>
           <MDBBtn className="mb-4 mx-4" href='#'>Bid Amount | Bid</MDBBtn>
       </MDBCol>
