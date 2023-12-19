@@ -1,6 +1,7 @@
 import React from 'react';
 import { MDBCard, MDBCardHeader, MDBCardBody } from 'mdb-react-ui-kit';
 
+
 const PlayerCard = ({ data, currentIndex, selectedCategory, isCardVisible,allPlayersFinished }) => {
   const getCategoryName = (category) => {
     if (category === "Batsman(w/k)") {

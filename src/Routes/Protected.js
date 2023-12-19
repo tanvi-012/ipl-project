@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../Contexts/AuthContext";
 
-export function Protected({children}){
+export default function Protected({children}){
     const {user} = useContext(Context);
 
     if(!user){

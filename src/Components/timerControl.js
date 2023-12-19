@@ -1,18 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import {startTimer} from '../actions/actions';
-import { store } from "../store/store";
+import io from 'socket.io-client';
+import { MDBBtn } from "mdb-react-ui-kit";
+
+const socket = io.connect("http://127.0.0.1:5000");
 
 const TimerControl = () => {
-    const dispatch = useDispatch();
-
     const handleStartTimer = () => {
-        store.dispatch(startTimer());
-        console.log(startTimer());
+        socket.emit('running',1);
+        console.log('inside handle timer');
     };
 return(
-    <div>
-        <button onClick={handleStartTimer}>Start Bid</button>
+    <div style={{  alignItems: 'center', margin: '0 auto' }}>
+        <MDBBtn onClick={handleStartTimer}>Start Bid</MDBBtn>
     </div>
 );
 }

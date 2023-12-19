@@ -1,21 +1,42 @@
 import React, {  useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import io from 'socket.io-client'
 
-const timeRunning = state => state.timeRunning;
+const socket = io.connect("http://127.0.0.1:5000");
+
+
+
+
 const TimerComponent = () => {
-  const [seconds, setSeconds] = useState(30000);
-  const isRunning = useSelector(timeRunning)
+  const [seconds, setSeconds] = useState(3000);
+  const [isRunning,setIsRunning]=useState(0);
+
+  useEffect(() =>{
+    socket.on('running',(running) => {
+      console.log('running:',running);
+      setSeconds(3000)
+      setIsRunning(running);
+    })
+    return () =>{
+     
+    };
+  },[]);
+
+  console.log('isRunning',isRunning);
   useEffect(() => {
     let timer;
-    console.log('seconds',seconds);
-    console.log('isRunning',isRunning);
     if (isRunning) {
       timer = setInterval(() => {
-        setSeconds(prevSeconds => prevSeconds - 1);
+        setSeconds(prevSeconds => {
+          if (prevSeconds > 0) {
+            return prevSeconds - 1;
+          } else {
+            clearInterval(timer);
+            socket.emit('running',0);
+            setSeconds(3000);
+            return 0; // Ensure the timer doesn't go negative
+          }
+        });
       }, 1);
-      // console.log('seconds',seconds);
-    } else {
-      clearInterval(timer);
     }
     return () => clearInterval(timer);
   }, [isRunning]);

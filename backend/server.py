@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
 import mysql.connector
 from flask_cors import CORS
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["http://localhost:3000"])
+
+socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
 
 # MySQL configuration
 mysql_config = {
@@ -53,11 +56,25 @@ def execute_query():
         print(f"Unexpected Error: {str(e)}")
         return jsonify({'error': 'Internal Server Error'})
 
-    finally:
-        # Always close the cursor and connection
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
+@socketio.on('running')
+def handle_start(running):
+    socketio.emit('running',running)
+    print('Running:',running)
+
+@socketio.on('category')
+def set_category(category):
+    socketio.emit('category',category)
+    print('Category:',category)
+
+@socketio.on('data')
+def set_data(data):
+    socketio.emit('data',data)
+    print('Data:',data)
+
+@socketio.on('index')
+def set_data(index):
+    socketio.emit('index',index)
+    print('Index:',index)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app,debug=True)

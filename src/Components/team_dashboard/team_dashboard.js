@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 MDBContainer,
   MDBCard,
@@ -14,6 +14,10 @@ MDBContainer,
 } from 'mdb-react-ui-kit';
 import PlayerCard from '../playerCard';
 import TimerComponent from '../timer';
+import TimerControl from '../timerControl';
+import io from 'socket.io-client'
+
+const socket = io.connect("http://127.0.0.1:5000");
 
 const LiStyle ={
   width: '25%',
@@ -27,18 +31,59 @@ const ListTitle={
 }
 
 export default function TeamDashboard() {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [data, setData] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [allPlayersFinished, setAllPlayersFinished] = useState(false);
+
+  useEffect(() =>{
+    socket.on('category',(category) => {
+      console.log('category:',category);
+      setSelectedCategory(category);
+    })
+    return () =>{
+     
+    };
+  },[]);
+
+  useEffect(() =>{
+    socket.on('data',(data) => {
+      console.log('data:',data);
+      setData(data);
+    })
+    return () =>{
+     
+    };
+  },[]);
+
+  useEffect(() =>{
+    socket.on('index',(index) => {
+      console.log('index:',index);
+      setCurrentIndex(index);
+    })
+    return () =>{
+     
+    };
+  },[]);
+
   return (
     <MDBContainer className='my-5'>
       <MDBRow className='g-0 d-flex align-items-center mb-4'>
         <MDBCol md='8'>
           <MDBCard alignment='center'>
-          <PlayerCard/>
+          <PlayerCard 
+          data={data}
+          currentIndex={currentIndex}
+          selectedCategory={selectedCategory}
+          isCardVisible={true}
+          allPlayersFinished={allPlayersFinished}
+          />
         </MDBCard>
       </MDBCol>
       <MDBCol md='4'>
           <div className='mx-4 mb-4'><TimerComponent></TimerComponent></div>
           <div className='mx-4 mb-4'>Previous Bid</div>
-          <MDBBtn className="mb-4 mx-4" href='#'>Bid Amount | Bid</MDBBtn>
+          <div className='mx-4 mb-4'>Bid Amount   <TimerControl></TimerControl></div>
       </MDBCol>
     </MDBRow>
     <MDBRow className='g-0 d-flex align-items-center'>
