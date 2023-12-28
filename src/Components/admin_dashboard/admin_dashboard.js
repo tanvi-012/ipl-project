@@ -34,10 +34,12 @@ export default function AdminDashboard(){
     setCardVisibility(!isCardVisible);
   };
 
-  const fetchData = async (category) => {
+  const fetchData = async (selectedCategory) => {
     try {
-      const response = await axios.get(`http://localhost:5000/execute-query?category=${category}`);
+      console.log(selectedCategory);
+      const response = await axios.get(`http://localhost:5000/execute_query?category=${selectedCategory}`);
       setData(response.data);
+      console.log(data);
       socket.emit('data',data);
       setAllPlayersFinished(false);
     } catch (error) {

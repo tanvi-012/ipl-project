@@ -16,13 +16,12 @@ const PlayerCard = ({ data, currentIndex, selectedCategory, isCardVisible,allPla
     }
 
     const categoryKeyOrders = {
-      Batsman: ['Batsman_ID', 'Name', 'Average', 'Strike_Rate'],
-      Bowler: ['Bowler_ID', 'Name', 'Average', 'Strike_Rate'],
-      'All Rounder': ['All_Rounder_ID', 'Name', 'Batting_Average', 'Batting_Strike_Rate', 'Bowling_Average', 'Bowling_Strike_Rate'],
-      'Batsman(w/k)': ['Wicket_Keeper_ID', 'Name', 'Average', 'Strike_Rate']
+      Batsman: ["Player_id", "Name", "Average", "Strike_Rate"],
+      Bowler: ["Player_id", "Name", "Average", "Economy"],
+      'All Rounder': ["Player_id", 'Name', 'Batting_Average', 'Batting_Strike_Rate', 'Bowling_Average', 'Economy'],
+      'Batsman(w/k)': ['Player_id', 'Name', 'Average', 'Strike_Rate']
       // Add other categories and their respective key orders as needed
     };
-
     const keyOrder = categoryKeyOrders[selectedCategory] || [];
 
     return keyOrder.map((key) => (

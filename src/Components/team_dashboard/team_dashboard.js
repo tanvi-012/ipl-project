@@ -13,6 +13,7 @@ MDBContainer,
   MDBCol
 } from 'mdb-react-ui-kit';
 import PlayerCard from '../playerCard';
+import axios from 'axios';
 import TimerComponent from '../timer';
 import TimerControl from '../timerControl';
 import io from 'socket.io-client'
@@ -31,40 +32,96 @@ const ListTitle={
 }
 
 export default function TeamDashboard() {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [data, setData] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [allPlayersFinished, setAllPlayersFinished] = useState(false);
 
-  useEffect(() =>{
-    socket.on('category',(category) => {
-      console.log('category:',category);
-      setSelectedCategory(category);
-    })
-    return () =>{
-     
-    };
-  },[]);
+    const [teamData, setTeamData] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [data, setData] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [allPlayersFinished, setAllPlayersFinished] = useState(false);
+  
+    useEffect(() =>{
+      socket.on('category',(category) => {
+        console.log('category:',category);
+        setSelectedCategory(category);
+      })
+      return () =>{
+       
+      };
+    },[]);
+  
+    useEffect(() =>{
+      socket.on('data',(data) => {
+        console.log('data:',data);
+        setData(data);
+      })
+      return () =>{
+       
+      };
+    },[]);
+  
+    useEffect(() =>{
+      socket.on('index',(index) => {
+        console.log('index:',index);
+        setCurrentIndex(index);
+      })
+      return () =>{
+       
+      };
+    },[]);
+    
 
-  useEffect(() =>{
-    socket.on('data',(data) => {
-      console.log('data:',data);
-      setData(data);
-    })
-    return () =>{
-     
-    };
-  },[]);
+    ////////////////////////////////// FOR GETTING THE BASE PRCE AND THE MAX PRICE OF PLAYER ////////////////////////////////////
 
-  useEffect(() =>{
-    socket.on('index',(index) => {
-      console.log('index:',index);
-      setCurrentIndex(index);
-    })
-    return () =>{
-     
+    const currentPlayerId = 151;
+    const [bidAmount, setBidAmount] = useState(null);
+
+    const fetchBidAmount = async () => {
+      try {
+          const response = await axios.get(`http://localhost:5000/get_bid_amount?player_id=${currentPlayerId}`);
+  
+          if (response.data.bid_amount !== null) {
+              setBidAmount(response.data.bid_amount);
+          } else {
+              console.error('Bid amount not found for the player');
+              // Handle the case where bid amount is not found
+          }
+      } catch (error) {
+          console.error('Error fetching bid amount:', error);
+          // Handle error, show an error message, etc.
+      }
+  };
+  
+  useEffect(() => {
+      // Fetch bid amount when the component mounts or when currentPlayerId changes
+      if (currentPlayerId) {
+          fetchBidAmount();
+      }
+  }, [currentPlayerId]);
+
+
+      /////////// FOR GETTING THE UPDATED PURSE //////////////////////////////////////////////////////
+
+  const [teamName, setTeamName] = useState('csk');
+  const [remainingPurse, setRemainingPurse] = useState(null);
+
+  useEffect(() => {
+    const fetchRemainingPurse = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/user/getpurse?team=${teamName}`);
+        const { remaining_purse } = response.data;
+
+        setRemainingPurse(remaining_purse);
+      } catch (error) {
+        console.error('Error fetching remaining purse:', error);
+      }
     };
-  },[]);
+
+    fetchRemainingPurse();
+  }, [teamName]);
+
+
+
+  
 
   return (
     <MDBContainer className='my-5'>
@@ -87,80 +144,24 @@ export default function TeamDashboard() {
       </MDBCol>
     </MDBRow>
     <MDBRow className='g-0 d-flex align-items-center'>
-      <MDBCol md='8' style={{maxHeight:'300px'}}> 
-          <div>
-          <MDBListGroup horizontal horizontalSize='xxl'>
-            <MDBListGroupItem flex-fill>Players from Algo</MDBListGroupItem>
-          </MDBListGroup>
 
-          <MDBListGroup horizontal horizontalSize='md'>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 1</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 2</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 3</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 4</MDBListGroupItem>
-          </MDBListGroup>
-
-          <MDBListGroup horizontal horizontalSize='md'>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 5</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 6</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 7</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 8</MDBListGroupItem>
-          </MDBListGroup>
-
-          <MDBListGroup horizontal horizontalSize='md'>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 9</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 10</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 11</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 12</MDBListGroupItem>
-          </MDBListGroup>
-
-          <MDBListGroup horizontal horizontalSize='md'>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 13</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 14</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 15</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 16</MDBListGroupItem>
-          </MDBListGroup>
-          
-          <MDBListGroup horizontal horizontalSize='md'>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 13</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 14</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 15</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 16</MDBListGroupItem>
-          </MDBListGroup>
-
-          <MDBListGroup horizontal horizontalSize='md'>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 13</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 14</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 15</MDBListGroupItem>
-            <MDBListGroupItem style={LiStyle} flex-fill>Player 16</MDBListGroupItem>
-          </MDBListGroup>
-
-        </div>
-      </MDBCol>
       <MDBCol md='4'>
-        <div>
-        <MDBListGroup horizontal horizontalSize='xxl' style={{paddingLeft:'20px'}}>
-            <MDBListGroupItem flex-fill>Players from Algo</MDBListGroupItem>
+          <MDBListGroup style={{ alignContent:'right',maxHeight: '300px', overflowY: 'auto' }}>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            <MDBListGroupItem>selected Players</MDBListGroupItem>
+            {/* Add more players as needed */}
           </MDBListGroup>
-          <MDBListGroup style={ListStyle} >
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-            <MDBListGroupItem flex-fill mx='4'>Players from Algo</MDBListGroupItem>
-          </MDBListGroup>
-        </div>
-      </MDBCol>
+        </MDBCol>
+
     </MDBRow>
     </MDBContainer>
   );
 }
+
