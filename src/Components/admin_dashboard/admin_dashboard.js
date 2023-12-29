@@ -17,6 +17,8 @@ export default function AdminDashboard(){
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [allPlayersFinished, setAllPlayersFinished] = useState(false);
+  const [bidTeam,setBidTeam]= useState(null);
+  const [prevBid,setPrevBid]= useState(null);
 
   const Player_id = 1;
   useEffect(() =>{
@@ -30,6 +32,24 @@ export default function AdminDashboard(){
     };
   },[]);
 
+  useEffect(() =>{
+    socket.on('bidTeam',(bidTeam) => {
+      setBidTeam(bidTeam);
+    })
+    return () =>{
+     
+    };
+  },[]);
+
+  useEffect(() =>{
+    socket.on('prevBid',(prevBid) => {
+      setPrevBid(prevBid);
+    })
+    return () =>{
+     
+    };
+  },[]);
+
   const handleCardClick = () => {
     setCardVisibility(!isCardVisible);
   };
@@ -37,10 +57,12 @@ export default function AdminDashboard(){
   const fetchData = async (selectedCategory) => {
     try {
       console.log(selectedCategory);
-      const response = await axios.get(`http://localhost:5000/execute_query?category=${selectedCategory}`);
+      const response = await axios.get('http://localhost:5000/execute_query', {
+  params: {
+    category: selectedCategory
+  }
+});;
       setData(response.data);
-      console.log(data);
-      socket.emit('data',data);
       setAllPlayersFinished(false);
     } catch (error) {
       console.error('Error:', error.message);
@@ -48,7 +70,11 @@ export default function AdminDashboard(){
   };
 
   useEffect(() => {
-    axios.delete(`http://localhost:5000/player_data_delete?id=${Player_id}`)
+    axios.delete(`http://localhost:5000/player_data_delete`,{
+      params:{
+      id:Player_id
+      }
+    })
       .then(response => {
         console.log('Data deleted successfully:', response.data);
       })
@@ -63,7 +89,11 @@ export default function AdminDashboard(){
     const fetchPurseData = async () => {
       try {
         const teamName = 'YourTeamName';
-        const response = await axios.get(`http://localhost:5000/user/getpurse?team=${teamName}`);
+        const response = await axios.get(`http://localhost:5000/user/getpurse`,{
+          params:{
+          team:teamName
+        }
+          });
         const { remaining_purse: remainingPurseValue } = response.data;
         setRemainingPurse(remainingPurseValue);
       } catch (error) {
@@ -132,10 +162,12 @@ export default function AdminDashboard(){
     if (!data || currentIndex === data.length || category !== selectedCategory) {
       fetchData(category);
       setCurrentIndex(0);
+      socket.emit('index',0);
     } else {
       setCurrentIndex(currentIndex + 1);
+      socket.emit('index',currentIndex+1);
     }
-    socket.emit('index',currentIndex);
+    console.log('dfg',currentIndex)
   };
 
   useEffect(() => {
@@ -154,7 +186,7 @@ export default function AdminDashboard(){
   return (
     <MDBContainer className='my-5'>
       <MDBRow className='g-0 d-flex align-items-center'>
-        <MDBCol md='6'><div>Bid Amount| Bid Team</div></MDBCol>
+        <MDBCol md='6'><div>{prevBid}| {bidTeam}</div></MDBCol>
         <MDBCol md='6'>
             <TimerComponent></TimerComponent>
         </MDBCol>

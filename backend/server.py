@@ -122,8 +122,8 @@ def get_bid_amount():
         connection.close()
 
         if bid_amount is not None:
-            return jsonify({"min bid_amount": bid_amount[0],
-        "max bid_amount": bid_amount[1]})
+            return jsonify({"min_bid_amount": bid_amount[0],
+        "max_bid_amount": bid_amount[1]})
         else:
             return jsonify({"error": "Bid amount not found for the specified player_id"}), 404
 
@@ -136,8 +136,8 @@ def get_bid_amount():
 def user_getpurse_model():
     try:
  # Assuming the team information is in the JSON form in the request body
-        request_data = request.json
-        team_name = request_data.get('team')
+        # request_data = request.json
+        team_name = request.args.get('team')
 
         if not team_name:
             return jsonify({"error": "Team name not provided"}), 400
@@ -176,6 +176,8 @@ def handle_post_request():
 
         # Get data from the request JSON
         data = request.json
+        connection = create_connection()
+        cursor = connection.cursor()
 
         # Perform operations with the received data
         # ...
@@ -200,6 +202,8 @@ def handle_delete_request():
     try:
     # Get the player ID from the request parameters
         player_id = request.args.get('id')
+        connection = create_connection()
+        cursor = connection.cursor()
 
         # Perform the delete operation in the database
         # Replace 'YourTable' with the actual name of your table
@@ -715,7 +719,7 @@ def user_selectedteam_model():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Chennai Super Kings'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'CSK'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -731,7 +735,7 @@ def user_selectedteam_model1():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Delhi Capitals'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'DC'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -747,7 +751,7 @@ def user_selectedteam_model166():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Gujarat Titans'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'GT'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -763,7 +767,7 @@ def user_selectedteam_model12():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Kolkata Knight Riders'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'KKR'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -779,7 +783,7 @@ def user_selectedteam_model13():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Lucknow Super Giants'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'LSG'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -795,7 +799,7 @@ def user_selectedteam_model14():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Mumbai Indians'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'MI'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -811,7 +815,7 @@ def user_selectedteam_model15():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Punjab Kings'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'PK'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -827,7 +831,7 @@ def user_selectedteam_model16():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Royal Challengers Bangalore'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'RCB'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -843,7 +847,7 @@ def user_selectedteam_model17():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Rajasthan Royals'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'RR'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -859,7 +863,7 @@ def user_selectedteam_model18():
     try:
         connection = create_connection() # Establish connection using create_connection()
         cursor = connection.cursor()
-        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'Sunrisers Hyderabad'"
+        query = "SELECT `Player Name` FROM Retained_Players WHERE Team = 'SRH'"
         cursor.execute(query)
         result = cursor.fetchall()
         return jsonify({'players': result})
@@ -885,6 +889,14 @@ def set_category(category):
 def set_data(data):
     socketio.emit('data',data)
     print('Data:',data)
+
+@socketio.on('bidTeam')
+def set_bidTeam(bidTeam):
+    socketio.emit('bidTeam',bidTeam)
+
+@socketio.on('prevBid')
+def set_prevBid(prevBid):
+    socketio.emit('prevBid',prevBid)
 
 @socketio.on('index')
 def set_data(index):

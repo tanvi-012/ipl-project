@@ -37,16 +37,16 @@ const PlayerCard = ({ data, currentIndex, selectedCategory, isCardVisible,allPla
     <>
       {isCardVisible && (
         <MDBCard style={{ width: '400px', alignItems: 'center', margin: '0 auto' }}>
-          <MDBCardHeader style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>
+          <MDBCardHeader style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '0px' }}>
             {getCategoryName(selectedCategory)}
           </MDBCardHeader>
-          <MDBCardBody>
+          <MDBCardBody style={{ padding:'7px' }}>
             <table>
               <tbody>
                 {displayPlayerStats()}
               </tbody>
             </table>
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <div style={{ textAlign: 'center', marginTop: '10px' }}>
             </div>
           </MDBCardBody>
         </MDBCard>

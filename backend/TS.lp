@@ -78,7 +78,7 @@ ar_max: Chosen_Abdul_Basith + Chosen_Adam_Milne + Chosen_Aman_Khan
  + Chosen_Rovman_Powell + Chosen_Shahbaz_Ahmed + Chosen_Shahbaz_Nadeem
  + Chosen_Shakib_Al_Hasan + Chosen_Shardul_Thakur + Chosen_Shivam_Mavi
  + Chosen_Shreyas_Gopal + Chosen_Tom_Curran + Chosen_Tristan_Stubbs
- + Chosen_Wanindu_Hasaranga <= 4
+ + Chosen_Wanindu_Hasaranga <= 5
 ar_min: Chosen_Abdul_Basith + Chosen_Adam_Milne + Chosen_Aman_Khan
  + Chosen_Ben_Stokes + Chosen_Chetan_Sakariya + Chosen_Chris_Jordan
  + Chosen_Daniel_Sams + Chosen_David_Wiese + Chosen_Dushmantha_Chameera
@@ -91,7 +91,7 @@ ar_min: Chosen_Abdul_Basith + Chosen_Adam_Milne + Chosen_Aman_Khan
  + Chosen_Rovman_Powell + Chosen_Shahbaz_Ahmed + Chosen_Shahbaz_Nadeem
  + Chosen_Shakib_Al_Hasan + Chosen_Shardul_Thakur + Chosen_Shivam_Mavi
  + Chosen_Shreyas_Gopal + Chosen_Tom_Curran + Chosen_Tristan_Stubbs
- + Chosen_Wanindu_Hasaranga >= 1
+ + Chosen_Wanindu_Hasaranga >= 2
 bat_max: Chosen_Abhijeet_Tomar + Chosen_Baba_Indrajith
  + Chosen_Bhanuka_Rajapaksa + Chosen_Chris_Lynn + Chosen_Chris_Woakes
  + Chosen_Daryl_Mitchell + Chosen_Dasun_Shanaka + Chosen_David_Malan
@@ -107,7 +107,7 @@ bat_max: Chosen_Abhijeet_Tomar + Chosen_Baba_Indrajith
  + Chosen_Shahrukh_Khan + Chosen_Shashank_Singh + Chosen_Sherfane_Rutherford
  + Chosen_Shreevats_Goswami + Chosen_Srikar_Bharat + Chosen_Steve_Smith
  + Chosen_Tim_Seifert + Chosen_Tom_Banton + Chosen_Virat_Singh
- + Chosen_Vivrant_Sharma <= 4
+ + Chosen_Vivrant_Sharma <= 2
 bat_min: Chosen_Abhijeet_Tomar + Chosen_Baba_Indrajith
  + Chosen_Bhanuka_Rajapaksa + Chosen_Chris_Lynn + Chosen_Chris_Woakes
  + Chosen_Daryl_Mitchell + Chosen_Dasun_Shanaka + Chosen_David_Malan
@@ -123,7 +123,7 @@ bat_min: Chosen_Abhijeet_Tomar + Chosen_Baba_Indrajith
  + Chosen_Shahrukh_Khan + Chosen_Shashank_Singh + Chosen_Sherfane_Rutherford
  + Chosen_Shreevats_Goswami + Chosen_Srikar_Bharat + Chosen_Steve_Smith
  + Chosen_Tim_Seifert + Chosen_Tom_Banton + Chosen_Virat_Singh
- + Chosen_Vivrant_Sharma >= 2
+ + Chosen_Vivrant_Sharma >= 0
 bowl_max: Chosen_Adil_Rashid + Chosen_Akash_Singh + Chosen_Akeal_Hosein
  + Chosen_Alzarri_Joseph + Chosen_Andrew_Tye + Chosen_Ankit_Rajpoot
  + Chosen_Arshad_Khan + Chosen_Basil_Thampi + Chosen_Dhawal_Kulkarni
@@ -139,7 +139,7 @@ bowl_max: Chosen_Adil_Rashid + Chosen_Akash_Singh + Chosen_Akeal_Hosein
  + Chosen_Sean_Abbott + Chosen_Sheldon_Cottrell + Chosen_Siddharth_Kaul
  + Chosen_Sisanda_Magala + Chosen_Swapnil_Singh + Chosen_Tabraiz_Shamsi
  + Chosen_Tim_Southee + Chosen_Tymal_Mills + Chosen_Umesh_Yadav
- + Chosen_Varun_Aaron + Chosen_Wayne_Parnell + Chosen_Yash_Dayal <= 2
+ + Chosen_Varun_Aaron + Chosen_Wayne_Parnell + Chosen_Yash_Dayal <= 5
 bowl_min: Chosen_Adil_Rashid + Chosen_Akash_Singh + Chosen_Akeal_Hosein
  + Chosen_Alzarri_Joseph + Chosen_Andrew_Tye + Chosen_Ankit_Rajpoot
  + Chosen_Arshad_Khan + Chosen_Basil_Thampi + Chosen_Dhawal_Kulkarni
@@ -155,7 +155,7 @@ bowl_min: Chosen_Adil_Rashid + Chosen_Akash_Singh + Chosen_Akeal_Hosein
  + Chosen_Sean_Abbott + Chosen_Sheldon_Cottrell + Chosen_Siddharth_Kaul
  + Chosen_Sisanda_Magala + Chosen_Swapnil_Singh + Chosen_Tabraiz_Shamsi
  + Chosen_Tim_Southee + Chosen_Tymal_Mills + Chosen_Umesh_Yadav
- + Chosen_Varun_Aaron + Chosen_Wayne_Parnell + Chosen_Yash_Dayal >= 0
+ + Chosen_Varun_Aaron + Chosen_Wayne_Parnell + Chosen_Yash_Dayal >= 3
 costs_max: 134 Chosen_Abdul_Basith + 223 Chosen_Abhijeet_Tomar
  + 250 Chosen_Adam_Milne + 253 Chosen_Adil_Rashid + 290 Chosen_Akash_Singh
  + 240 Chosen_Akeal_Hosein + 358 Chosen_Alzarri_Joseph + 266 Chosen_Aman_Khan
@@ -211,7 +211,7 @@ costs_max: 134 Chosen_Abdul_Basith + 223 Chosen_Abhijeet_Tomar
  + 275 Chosen_Tymal_Mills + 388 Chosen_Umesh_Yadav + 321 Chosen_Varun_Aaron
  + 219 Chosen_Virat_Singh + 115 Chosen_Vivrant_Sharma
  + 676 Chosen_Wanindu_Hasaranga + 278 Chosen_Wayne_Parnell
- + 348 Chosen_Yash_Dayal <= 3140
+ + 348 Chosen_Yash_Dayal <= 1575
 costs_min: 134 Chosen_Abdul_Basith + 223 Chosen_Abhijeet_Tomar
  + 250 Chosen_Adam_Milne + 253 Chosen_Adil_Rashid + 290 Chosen_Akash_Singh
  + 240 Chosen_Akeal_Hosein + 358 Chosen_Alzarri_Joseph + 266 Chosen_Aman_Khan
@@ -312,24 +312,34 @@ foreign_min: Chosen_Adam_Milne + Chosen_Adil_Rashid + Chosen_Akeal_Hosein
  + Chosen_Tabraiz_Shamsi + Chosen_Tim_Seifert + Chosen_Tim_Southee
  + Chosen_Tom_Banton + Chosen_Tom_Curran + Chosen_Tristan_Stubbs
  + Chosen_Tymal_Mills + Chosen_Wanindu_Hasaranga + Chosen_Wayne_Parnell >= 0
-home_ground_max: Chosen_Akash_Singh + Chosen_Aman_Khan + Chosen_Arshad_Khan
- + Chosen_David_Wiese + Chosen_Harry_Brook + Chosen_Harshal_Patel
+home_ground_max: Chosen_Alzarri_Joseph + Chosen_Arshad_Khan
+ + Chosen_Chetan_Sakariya + Chosen_Daniel_Sams + Chosen_David_Wiese
+ + Chosen_David_Willey + Chosen_Dwaine_Pretorius + Chosen_Harshal_Patel
  + Chosen_Hrithik_Shokeen + Chosen_Jason_Holder + Chosen_Jaydev_Unadkat
- + Chosen_Jofra_Archer + Chosen_Mandeep_Singh + Chosen_Manish_Pandey
- + Chosen_Mohsin_Khan + Chosen_Murugan_Ashwin + Chosen_Phil_Salt
- + Chosen_Rilee_Rossouw + Chosen_Ripal_Patel + Chosen_Shahbaz_Ahmed
- + Chosen_Shahrukh_Khan + Chosen_Shakib_Al_Hasan + Chosen_Shardul_Thakur
+ + Chosen_Jofra_Archer + Chosen_Josh_Hazlewood + Chosen_Kamlesh_Nagarkoti
+ + Chosen_Kartik_Tyagi + Chosen_Kumar_Kartikeya + Chosen_Lockie_Ferguson
+ + Chosen_Manan_Vohra + Chosen_Mandeep_Singh + Chosen_Manish_Pandey
+ + Chosen_Mohsin_Khan + Chosen_Murugan_Ashwin + Chosen_Mustafizur_Rahman
+ + Chosen_Obed_Mccoy + Chosen_Odean_Smith + Chosen_Pradeep_Sangwan
+ + Chosen_Ramandeep_Singh + Chosen_Rilee_Rossouw + Chosen_Riley_Meredith
+ + Chosen_Sandeep_Warrier + Chosen_Shahbaz_Ahmed + Chosen_Shahrukh_Khan
+ + Chosen_Shakib_Al_Hasan + Chosen_Shardul_Thakur + Chosen_Shivam_Mavi
  + Chosen_Siddharth_Kaul + Chosen_Sisanda_Magala + Chosen_Tim_Southee
- + Chosen_Umesh_Yadav <= 2
-home_ground_min: Chosen_Akash_Singh + Chosen_Aman_Khan + Chosen_Arshad_Khan
- + Chosen_David_Wiese + Chosen_Harry_Brook + Chosen_Harshal_Patel
+ + Chosen_Umesh_Yadav + Chosen_Wayne_Parnell + Chosen_Yash_Dayal <= 2
+home_ground_min: Chosen_Alzarri_Joseph + Chosen_Arshad_Khan
+ + Chosen_Chetan_Sakariya + Chosen_Daniel_Sams + Chosen_David_Wiese
+ + Chosen_David_Willey + Chosen_Dwaine_Pretorius + Chosen_Harshal_Patel
  + Chosen_Hrithik_Shokeen + Chosen_Jason_Holder + Chosen_Jaydev_Unadkat
- + Chosen_Jofra_Archer + Chosen_Mandeep_Singh + Chosen_Manish_Pandey
- + Chosen_Mohsin_Khan + Chosen_Murugan_Ashwin + Chosen_Phil_Salt
- + Chosen_Rilee_Rossouw + Chosen_Ripal_Patel + Chosen_Shahbaz_Ahmed
- + Chosen_Shahrukh_Khan + Chosen_Shakib_Al_Hasan + Chosen_Shardul_Thakur
+ + Chosen_Jofra_Archer + Chosen_Josh_Hazlewood + Chosen_Kamlesh_Nagarkoti
+ + Chosen_Kartik_Tyagi + Chosen_Kumar_Kartikeya + Chosen_Lockie_Ferguson
+ + Chosen_Manan_Vohra + Chosen_Mandeep_Singh + Chosen_Manish_Pandey
+ + Chosen_Mohsin_Khan + Chosen_Murugan_Ashwin + Chosen_Mustafizur_Rahman
+ + Chosen_Obed_Mccoy + Chosen_Odean_Smith + Chosen_Pradeep_Sangwan
+ + Chosen_Ramandeep_Singh + Chosen_Rilee_Rossouw + Chosen_Riley_Meredith
+ + Chosen_Sandeep_Warrier + Chosen_Shahbaz_Ahmed + Chosen_Shahrukh_Khan
+ + Chosen_Shakib_Al_Hasan + Chosen_Shardul_Thakur + Chosen_Shivam_Mavi
  + Chosen_Siddharth_Kaul + Chosen_Sisanda_Magala + Chosen_Tim_Southee
- + Chosen_Umesh_Yadav >= 0
+ + Chosen_Umesh_Yadav + Chosen_Wayne_Parnell + Chosen_Yash_Dayal >= 0
 pace_max: Chosen_Adam_Milne + Chosen_Akash_Singh + Chosen_Alzarri_Joseph
  + Chosen_Aman_Khan + Chosen_Andrew_Tye + Chosen_Ankit_Rajpoot
  + Chosen_Arshad_Khan + Chosen_Basil_Thampi + Chosen_Ben_Stokes
@@ -350,7 +360,7 @@ pace_max: Chosen_Adam_Milne + Chosen_Akash_Singh + Chosen_Alzarri_Joseph
  + Chosen_Sheldon_Cottrell + Chosen_Shivam_Mavi + Chosen_Siddharth_Kaul
  + Chosen_Sisanda_Magala + Chosen_Tim_Southee + Chosen_Tom_Curran
  + Chosen_Tymal_Mills + Chosen_Umesh_Yadav + Chosen_Varun_Aaron
- + Chosen_Wayne_Parnell + Chosen_Yash_Dayal <= 1
+ + Chosen_Wayne_Parnell + Chosen_Yash_Dayal <= 3
 pace_min: Chosen_Adam_Milne + Chosen_Akash_Singh + Chosen_Alzarri_Joseph
  + Chosen_Aman_Khan + Chosen_Andrew_Tye + Chosen_Ankit_Rajpoot
  + Chosen_Arshad_Khan + Chosen_Basil_Thampi + Chosen_Ben_Stokes
@@ -371,7 +381,7 @@ pace_min: Chosen_Adam_Milne + Chosen_Akash_Singh + Chosen_Alzarri_Joseph
  + Chosen_Sheldon_Cottrell + Chosen_Shivam_Mavi + Chosen_Siddharth_Kaul
  + Chosen_Sisanda_Magala + Chosen_Tim_Southee + Chosen_Tom_Curran
  + Chosen_Tymal_Mills + Chosen_Umesh_Yadav + Chosen_Varun_Aaron
- + Chosen_Wayne_Parnell + Chosen_Yash_Dayal >= 0
+ + Chosen_Wayne_Parnell + Chosen_Yash_Dayal >= 1
 spin_max: Chosen_Abdul_Basith + Chosen_Adil_Rashid + Chosen_Akeal_Hosein
  + Chosen_David_Willey + Chosen_Fabian_Allen + Chosen_George_Garton
  + Chosen_Hrithik_Shokeen + Chosen_Ishan_Porel + Chosen_Jalaj_Saxena
@@ -380,7 +390,7 @@ spin_max: Chosen_Abdul_Basith + Chosen_Adil_Rashid + Chosen_Akeal_Hosein
  + Chosen_Raghav_Goyal + Chosen_Sanjay_Yadav + Chosen_Shahbaz_Ahmed
  + Chosen_Shahbaz_Nadeem + Chosen_Shakib_Al_Hasan + Chosen_Shreyas_Gopal
  + Chosen_Swapnil_Singh + Chosen_Tabraiz_Shamsi + Chosen_Tristan_Stubbs
- + Chosen_Wanindu_Hasaranga <= 1
+ + Chosen_Wanindu_Hasaranga <= 3
 spin_min: Chosen_Abdul_Basith + Chosen_Adil_Rashid + Chosen_Akeal_Hosein
  + Chosen_David_Willey + Chosen_Fabian_Allen + Chosen_George_Garton
  + Chosen_Hrithik_Shokeen + Chosen_Ishan_Porel + Chosen_Jalaj_Saxena
@@ -433,7 +443,7 @@ team_max: Chosen_Abdul_Basith + Chosen_Abhijeet_Tomar + Chosen_Adam_Milne
  + Chosen_Tom_Banton + Chosen_Tom_Curran + Chosen_Tristan_Stubbs
  + Chosen_Tymal_Mills + Chosen_Umesh_Yadav + Chosen_Varun_Aaron
  + Chosen_Virat_Singh + Chosen_Vivrant_Sharma + Chosen_Wanindu_Hasaranga
- + Chosen_Wayne_Parnell + Chosen_Yash_Dayal <= 6
+ + Chosen_Wayne_Parnell + Chosen_Yash_Dayal <= 8
 team_min: Chosen_Abdul_Basith + Chosen_Abhijeet_Tomar + Chosen_Adam_Milne
  + Chosen_Adil_Rashid + Chosen_Akash_Singh + Chosen_Akeal_Hosein
  + Chosen_Alzarri_Joseph + Chosen_Aman_Khan + Chosen_Andrew_Tye
@@ -477,15 +487,15 @@ team_min: Chosen_Abdul_Basith + Chosen_Abhijeet_Tomar + Chosen_Adam_Milne
  + Chosen_Tom_Banton + Chosen_Tom_Curran + Chosen_Tristan_Stubbs
  + Chosen_Tymal_Mills + Chosen_Umesh_Yadav + Chosen_Varun_Aaron
  + Chosen_Virat_Singh + Chosen_Vivrant_Sharma + Chosen_Wanindu_Hasaranga
- + Chosen_Wayne_Parnell + Chosen_Yash_Dayal >= 0
+ + Chosen_Wayne_Parnell + Chosen_Yash_Dayal >= 1
 wk_max: Chosen_Josh_Philippe + Chosen_Liton_Das + Chosen_Narayan_Jagadeesan
  + Chosen_Nikhil_Naik + Chosen_Phil_Salt + Chosen_Sam_Billings
  + Chosen_Sarfaraz_Khan + Chosen_Shreevats_Goswami + Chosen_Srikar_Bharat
- + Chosen_Tim_Seifert + Chosen_Tom_Banton + Chosen_Tristan_Stubbs <= 3
+ + Chosen_Tim_Seifert + Chosen_Tom_Banton + Chosen_Tristan_Stubbs <= 2
 wk_min: Chosen_Josh_Philippe + Chosen_Liton_Das + Chosen_Narayan_Jagadeesan
  + Chosen_Nikhil_Naik + Chosen_Phil_Salt + Chosen_Sam_Billings
  + Chosen_Sarfaraz_Khan + Chosen_Shreevats_Goswami + Chosen_Srikar_Bharat
- + Chosen_Tim_Seifert + Chosen_Tom_Banton + Chosen_Tristan_Stubbs >= 1
+ + Chosen_Tim_Seifert + Chosen_Tom_Banton + Chosen_Tristan_Stubbs >= 0
 Binaries
 Chosen_Abdul_Basith
 Chosen_Abhijeet_Tomar

@@ -112,7 +112,7 @@ export default function TeamDashboard() {
 
       /////////// FOR GETTING THE UPDATED PURSE //////////////////////////////////////////////////////
 
-  const [teamName, setTeamName] = useState('csk');
+  const [teamName, setTeamName] = useState('rr');
   const [remainingPurse, setRemainingPurse] = useState(null);
 
   useEffect(() => {
@@ -133,16 +133,16 @@ export default function TeamDashboard() {
   }, [teamName]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/team/csk')
+    axios.get('http://localhost:5000/team/rr')
       .then(response => {
         const selected = response.data || [];
         setSelectedPlayers(selected);
       })
       .catch(error => {
-        console.error('Error fetching team/csk:', error);
+        console.error('Error fetching team/rr:', error);
       });
 
-    axios.get('http://localhost:5000/user/selectedteam/csk')
+    axios.get('http://localhost:5000/user/selectedteam/rr')
       .then(response => {
         const data = response.data || {};
         if (data.players) {
@@ -151,7 +151,7 @@ export default function TeamDashboard() {
         }
       })
       .catch(error => {
-        console.error('Error fetching user/selectedteam/csk:', error);
+        console.error('Error fetching user/selectedteam/rr:', error);
       });
   }, []);
 

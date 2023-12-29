@@ -17,6 +17,7 @@ import axios from 'axios';
 import TimerComponent from '../timer';
 import TimerControl from '../timerControl';
 import io from 'socket.io-client'
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
 const socket = io.connect("http://127.0.0.1:5000");
 
@@ -40,6 +41,9 @@ export default function TeamDashboard() {
     const [allPlayersFinished, setAllPlayersFinished] = useState(false);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
     const [players, setPlayers] = useState([]);
+    const [bidTeam,setBidTeam]= useState(null);
+    const [prevBid,setPrevBid]= useState(null);
+  
   
     useEffect(() =>{
       socket.on('category',(category) => {
@@ -57,6 +61,26 @@ export default function TeamDashboard() {
       socket.on('index',(index) => {
         console.log('index:',index);
         setCurrentIndex(index);
+        console.log("this",currentIndex);
+      })
+      return () =>{
+       
+      };
+    },[]);
+
+    useEffect(() =>{
+      socket.on('bidTeam',(bidTeam) => {
+        setBidTeam(bidTeam);
+      })
+      return () =>{
+       
+      };
+    },[]);
+
+    useEffect(() =>{
+      socket.on('prevBid',(prevBid) => {
+        setPrevBid(prevBid);
+        setBaseAmount(prevBid+10);
       })
       return () =>{
        
@@ -112,7 +136,7 @@ export default function TeamDashboard() {
 
       /////////// FOR GETTING THE UPDATED PURSE //////////////////////////////////////////////////////
 
-  const [teamName, setTeamName] = useState('csk');
+  const [teamName, setTeamName] = useState('mi');
   const [remainingPurse, setRemainingPurse] = useState(null);
 
   useEffect(() => {
@@ -133,16 +157,16 @@ export default function TeamDashboard() {
   }, [teamName]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/team/csk')
+    axios.get('http://localhost:5000/team/mi')
       .then(response => {
         const selected = response.data || [];
         setSelectedPlayers(selected);
       })
       .catch(error => {
-        console.error('Error fetching team/csk:', error);
+        console.error('Error fetching team/mi:', error);
       });
 
-    axios.get('http://localhost:5000/user/selectedteam/csk')
+    axios.get('http://localhost:5000/user/selectedteam/mi')
       .then(response => {
         const data = response.data || {};
         if (data.players) {
@@ -151,7 +175,7 @@ export default function TeamDashboard() {
         }
       })
       .catch(error => {
-        console.error('Error fetching user/selectedteam/csk:', error);
+        console.error('Error fetching user/selectedteam/mi:', error);
       });
   }, []);
 
@@ -181,7 +205,13 @@ export default function TeamDashboard() {
     return rows;
   };
 
-  
+  const handleStartTimer = () => {
+    socket.emit('running',1);
+    console.log('inside handle timer');
+    socket.emit('prevBid',baseAmount);
+    setBaseAmount(baseAmount+10);
+    socket.emit('bidTeam','MI');
+  }
 
   return (
     <MDBContainer className='my-5'>
@@ -200,11 +230,15 @@ export default function TeamDashboard() {
       <MDBCol md='4'>
           <MDBRow className='mx-4 mb-2'><TimerComponent></TimerComponent></MDBRow>
           <MDBRow className='mx-4 mb-2'> <MDBCol>Purse: {remainingPurse}</MDBCol></MDBRow>
-          <MDBRow className='mx-4 mb-2'> <MDBCol>Previous Bid</MDBCol></MDBRow>
+          <MDBRow className='mx-4 mb-2'> <MDBCol>{prevBid}|{bidTeam}</MDBCol></MDBRow>
           <MDBRow className='mx-4 mb-2'> <MDBCol>Max Bid: {bidAmount}</MDBCol></MDBRow>
           <MDBRow className='mx-4 mb-2'>
           <MDBCol>Bid Amount: {baseAmount}</MDBCol>
-          <MDBCol><TimerControl></TimerControl></MDBCol></MDBRow>
+          <MDBCol>
+          <div style={{  alignItems: 'center', margin: '0 auto' }}>
+        <MDBBtn onClick={handleStartTimer}>Bid</MDBBtn>
+    </div>
+            </MDBCol></MDBRow>
       </MDBCol>
     </MDBRow>
     <MDBRow className='g-0 d-flex'>

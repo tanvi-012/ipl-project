@@ -112,7 +112,7 @@ export default function TeamDashboard() {
 
       /////////// FOR GETTING THE UPDATED PURSE //////////////////////////////////////////////////////
 
-  const [teamName, setTeamName] = useState('csk');
+  const [teamName, setTeamName] = useState('gt');
   const [remainingPurse, setRemainingPurse] = useState(null);
 
   useEffect(() => {
